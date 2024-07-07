@@ -18,6 +18,8 @@ export default class PokemonsList extends React.Component<PropsType> {
                 {this.props.pokemons.map((item) => {
                     if (item) {
                         return <PokemoItem pokemonData={item} key={item.key} />;
+                    } else {
+                        return <p key={Date.now()}>Pokemon is not found</p>;
                     }
                 })}
             </div>

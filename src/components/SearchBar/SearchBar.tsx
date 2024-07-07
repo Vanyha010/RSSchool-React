@@ -6,6 +6,7 @@ import ErrorButton from '../ErrorButton/ErrorButton';
 
 type SearchBarProps = {
     setPokemons: (pokemonData: (PokemonCardData | undefined)[]) => void;
+    setLoading: (loadingStatus: boolean) => void;
 };
 
 export default class SearchBar extends React.Component<SearchBarProps> {
@@ -34,23 +35,26 @@ export default class SearchBar extends React.Component<SearchBarProps> {
     };
 
     loadData = async () => {
+        this.props.setLoading(true);
         if (this.state.inputValue) {
             try {
                 const pokemonData = await getPokemonByName(
                     this.state.inputValue,
                 );
-                console.log(pokemonData);
                 this.props.setPokemons([pokemonData]);
             } catch (e) {
                 console.log(e);
+            } finally {
+                this.props.setLoading(true);
             }
         } else {
             try {
                 const pokemonsData = await getPokemonList();
-                console.log(pokemonsData);
                 this.props.setPokemons(pokemonsData);
             } catch (e) {
                 console.log(e);
+            } finally {
+                this.props.setLoading(false);
             }
         }
     };

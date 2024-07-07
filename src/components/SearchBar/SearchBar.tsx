@@ -1,9 +1,9 @@
-import { Pokemon, PokemonClient } from 'pokenode-ts';
 import React, { ChangeEvent } from 'react';
-import { getPokemonList } from '../../api/apiRequests';
+import { getPokemonByName, getPokemonList } from '../../api/apiRequests';
+import { PokemonCardData } from '../../types/types';
 
 type SearchBarProps = {
-    setPokemons: (pokemonData: Pokemon[]) => void;
+    setPokemons: (pokemonData: (PokemonCardData | undefined)[]) => void;
 };
 
 export default class SearchBar extends React.Component<SearchBarProps> {
@@ -23,21 +23,27 @@ export default class SearchBar extends React.Component<SearchBarProps> {
     };
 
     submitSearch = async () => {
-        const api = new PokemonClient();
+        // const api = new PokemonClient();
         if (this.state.inputValue) {
             try {
-                const pokemonData = await api.getPokemonByName(this.state.inputValue);
+                const pokemonData = await getPokemonByName(
+                    this.state.inputValue,
+                );
                 console.log(pokemonData);
-                this.props.setPokemons([pokemonData]);
-            } catch(e) {
+                if (pokemonData) {
+                    this.props.setPokemons([pokemonData]);
+                }
+            } catch (e) {
                 console.log(e);
             }
         } else {
             try {
                 const pokemonsData = await getPokemonList();
                 console.log(pokemonsData);
-                this.props.setPokemons(pokemonsData);
-            } catch(e) {
+                if (pokemonsData) {
+                    this.props.setPokemons(pokemonsData);
+                }
+            } catch (e) {
                 console.log(e);
             }
         }

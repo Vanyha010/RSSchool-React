@@ -1,9 +1,10 @@
-import { Pokemon } from "pokenode-ts";
-import React from "react";
-import PokemoItem from "../PokemonItem/PokemonItem";
+import React from 'react';
+import PokemoItem from '../PokemonItem/PokemonItem';
+import { PokemonCardData } from '../../types/types';
+import './pokemonList.css';
 
 type PropsType = {
-    pokemons: Pokemon[];
+    pokemons: (PokemonCardData | undefined)[];
 };
 
 export default class PokemonsList extends React.Component<PropsType> {
@@ -13,11 +14,13 @@ export default class PokemonsList extends React.Component<PropsType> {
 
     render(): React.ReactNode {
         return (
-            <div>
-                {this.props.pokemons.map((item) => (
-                    <PokemoItem pokemonData={item} key={item.id} />
-                ))}
+            <div className="pokemon-list">
+                {this.props.pokemons.map((item) => {
+                    if (item) {
+                        return <PokemoItem pokemonData={item} key={item.key} />;
+                    }
+                })}
             </div>
-        )
+        );
     }
 }

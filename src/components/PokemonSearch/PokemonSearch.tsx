@@ -1,10 +1,10 @@
-import { Pokemon } from 'pokenode-ts';
 import React from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import PokemonsList from '../PokemonsList/PokemonsList';
+import { PokemonCardData } from '../../types/types';
 
 type PokemonSearchState = {
-    pokemons: Pokemon[];
+    pokemons: PokemonCardData[] | undefined[];
 };
 
 export default class PokemonSearch extends React.Component {
@@ -12,14 +12,14 @@ export default class PokemonSearch extends React.Component {
         pokemons: [],
     };
 
-    setPokemons = (pokemonsData: Pokemon[]) => {
-        this.setState({pokemons: pokemonsData})
-    }
+    setPokemons = (pokemonsData: (PokemonCardData | undefined)[]) => {
+        this.setState({ pokemons: pokemonsData });
+    };
 
     render(): React.ReactNode {
-        return(
+        return (
             <>
-                <SearchBar setPokemons={this.setPokemons}/>
+                <SearchBar setPokemons={this.setPokemons} />
                 <PokemonsList pokemons={this.state.pokemons} />
             </>
         );

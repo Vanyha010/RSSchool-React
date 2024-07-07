@@ -45,7 +45,7 @@ export default class SearchBar extends React.Component<SearchBarProps> {
             } catch (e) {
                 console.log(e);
             } finally {
-                this.props.setLoading(true);
+                this.props.setLoading(false);
             }
         } else {
             try {

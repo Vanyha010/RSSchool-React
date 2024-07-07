@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { getPokemonByName, getPokemonList } from '../../api/apiRequests';
 import { PokemonCardData } from '../../types/types';
+import './searchBar.css';
 
 type SearchBarProps = {
     setPokemons: (pokemonData: (PokemonCardData | undefined)[]) => void;
@@ -12,7 +13,11 @@ export default class SearchBar extends React.Component<SearchBarProps> {
     }
 
     public state = {
-        inputValue: '',
+        inputValue: localStorage.getItem('inputValue') || '',
+    };
+
+    setInputValue = (value: string) => {
+        localStorage.setItem('inputValue', value);
     };
 
     inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -23,16 +28,14 @@ export default class SearchBar extends React.Component<SearchBarProps> {
     };
 
     submitSearch = async () => {
-        // const api = new PokemonClient();
+        this.setInputValue(this.state.inputValue);
         if (this.state.inputValue) {
             try {
                 const pokemonData = await getPokemonByName(
                     this.state.inputValue,
                 );
                 console.log(pokemonData);
-                if (pokemonData) {
-                    this.props.setPokemons([pokemonData]);
-                }
+                this.props.setPokemons([pokemonData]);
             } catch (e) {
                 console.log(e);
             }
@@ -40,9 +43,7 @@ export default class SearchBar extends React.Component<SearchBarProps> {
             try {
                 const pokemonsData = await getPokemonList();
                 console.log(pokemonsData);
-                if (pokemonsData) {
-                    this.props.setPokemons(pokemonsData);
-                }
+                this.props.setPokemons(pokemonsData);
             } catch (e) {
                 console.log(e);
             }
@@ -51,11 +52,12 @@ export default class SearchBar extends React.Component<SearchBarProps> {
 
     render(): React.ReactNode {
         return (
-            <header>
+            <header className="header">
                 <input
                     type="text"
                     value={this.state.inputValue}
                     onChange={this.inputHandler}
+                    className="header-input"
                 />
                 <button onClick={this.submitSearch}>Search</button>
             </header>

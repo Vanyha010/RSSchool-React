@@ -29,6 +29,10 @@ export default class SearchBar extends React.Component<SearchBarProps> {
 
     submitSearch = async () => {
         this.setInputValue(this.state.inputValue);
+        await this.loadData();
+    };
+
+    loadData = async () => {
         if (this.state.inputValue) {
             try {
                 const pokemonData = await getPokemonByName(
@@ -49,6 +53,10 @@ export default class SearchBar extends React.Component<SearchBarProps> {
             }
         }
     };
+
+    componentDidMount(): void {
+        this.loadData();
+    }
 
     render(): React.ReactNode {
         return (

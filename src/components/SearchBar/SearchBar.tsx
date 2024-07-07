@@ -2,6 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { getPokemonByName, getPokemonList } from '../../api/apiRequests';
 import { PokemonCardData } from '../../types/types';
 import './searchBar.css';
+import ErrorButton from '../ErrorButton/ErrorButton';
 
 type SearchBarProps = {
     setPokemons: (pokemonData: (PokemonCardData | undefined)[]) => void;
@@ -68,6 +69,7 @@ export default class SearchBar extends React.Component<SearchBarProps> {
                     className="header-input"
                 />
                 <button onClick={this.submitSearch}>Search</button>
+                <ErrorButton />
             </header>
         );
     }

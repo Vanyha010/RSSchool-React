@@ -13,13 +13,15 @@ export default class PokemonsList extends React.Component<PropsType> {
     }
 
     render(): React.ReactNode {
+        if (this.props.pokemons.length === 1 && !this.props.pokemons[0]) {
+            return <p>Pokemon is not found</p>;
+        }
+
         return (
             <div className="pokemon-list">
                 {this.props.pokemons.map((item) => {
                     if (item) {
                         return <PokemoItem pokemonData={item} key={item.key} />;
-                    } else {
-                        return <p key={Date.now()}>Pokemon is not found</p>;
                     }
                 })}
             </div>

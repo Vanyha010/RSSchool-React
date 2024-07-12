@@ -12,7 +12,7 @@ export default function PokemonSearch() {
 
     return (
         <>
-            <SearchBar setPokemons={setPokemons} setLoading={setIsLoading} />
+            <SearchBar setPokemons={setPokemons} setIsLoading={setIsLoading} />
             {isLoading ? <Loader /> : <PokemonsList pokemons={pokemons} />}
         </>
     );

@@ -57,7 +57,7 @@ export default function SearchBar(props: SearchBarProps) {
 
     useEffect(() => {
         loadData();
-    });
+    }, []);
 
     return (
         <header className="header">

@@ -1,18 +1,19 @@
-import { Component } from 'react';
+import { useState } from 'react';
 
-export default class ErrorButton extends Component {
-    state = { error: false };
+export default function ErrorButton() {
+    const [error, setError] = useState(false);
 
-    throw = () => {
-        this.setState({ error: true });
+    const throwError = () => {
+        setError(true);
     };
 
-    render() {
-        if (this.state.error) throw new Error('Some crazy Error');
-        return (
-            <button className="error__button" onClick={() => this.throw()}>
-                Error
-            </button>
-        );
+    if (error) {
+        throw new Error('Some crazy Error');
     }
+
+    return (
+        <button className="error__button" onClick={throwError}>
+            Error
+        </button>
+    );
 }

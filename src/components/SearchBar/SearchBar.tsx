@@ -1,8 +1,9 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { getPokemonByName, getPokemonList } from '../../api/apiRequests';
 import { PokemonCardData } from '../../types/types';
 import './searchBar.css';
 import ErrorButton from '../ErrorButton/ErrorButton';
+import useSearchQuery from '../../hooks/useSearchQuery';
 
 type SearchBarProps = {
     setPokemons: (pokemonData: (PokemonCardData | undefined)[]) => void;
@@ -12,9 +13,7 @@ type SearchBarProps = {
 export default function SearchBar(props: SearchBarProps) {
     const { setPokemons, setIsLoading } = props;
 
-    const [inputValue, setInputValue] = useState(
-        localStorage.getItem('inputValue') || '',
-    );
+    const [inputValue, setInputValue] = useSearchQuery('inputValue', '');
 
     const saveInputValue = (value: string) => {
         localStorage.setItem('inputValue', value);

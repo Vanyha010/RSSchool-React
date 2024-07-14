@@ -8,3 +8,7 @@ export function capitalize(string: string) {
 export function cleanDescription(string: string): string {
     return string.replace('\f', ' ');
 }
+
+export function upperFirstLetter(string: string): string {
+    return string.charAt(0).toLocaleUpperCase() + string.slice(1);
+}

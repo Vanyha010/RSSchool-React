@@ -1,3 +1,7 @@
+.pokemon-container {
+  display: flex;
+}
+
 .pokemon-list {
   display: flex;
   flex-wrap: wrap;

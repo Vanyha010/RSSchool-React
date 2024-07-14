@@ -4,11 +4,12 @@ import './pokemonItem.css';
 
 type PropsType = {
     pokemonData: PokemonCardData;
+    onPress: () => void;
 };
 
 export default function PokemonItem(props: PropsType) {
     return (
-        <div className="pokemon">
+        <div className="pokemon" onClick={props.onPress}>
             <h3 className="pokemon__title">
                 {capitalize(props.pokemonData.name)}
             </h3>

@@ -1,4 +1,4 @@
-import { NamedAPIResourceList, PokemonClient } from 'pokenode-ts';
+import { NamedAPIResourceList, Pokemon, PokemonClient } from 'pokenode-ts';
 import { PokemonCardData } from '../types/types';
 
 const api = new PokemonClient();
@@ -32,11 +32,12 @@ export async function getPokemonByName(
     };
 }
 
-export async function getPokemonList(): Promise<
-    (PokemonCardData | undefined)[]
-> {
+export async function getPokemonList(
+    offset: number = 0,
+    limit: number = 10,
+): Promise<(PokemonCardData | undefined)[]> {
     const response: NamedAPIResourceList | void = await api
-        .listPokemons()
+        .listPokemons(offset, limit)
         .then((data) => data)
         .catch(() => console.log('sdfsdf'));
 
@@ -50,4 +51,15 @@ export async function getPokemonList(): Promise<
     }
 
     return Promise.all(promises);
+}
+
+export default async function getPokemonById(
+    id: number,
+): Promise<Pokemon | undefined> {
+    const result = await api
+        .getPokemonById(id)
+        .then((data) => data)
+        .catch((error) => console.log(error));
+    if (!result) return;
+    return result;
 }

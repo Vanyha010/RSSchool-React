@@ -4,16 +4,6 @@ import PokemonDetails, {
     loader as pokemonDetailsLoader,
 } from '../components/PokemonDetails/PokemonDetails';
 
-// export const router = createBrowserRouter(
-//     createRoutesFromElements(
-//         <Route path="/">
-//             <Route index element={<PokemonSearch />} />
-//             <Route path="/details" element={<PokemonSearch />} />
-//             <Route path="*" element={<h1>Errorrororor</h1>} />
-//         </Route>,
-//     ),
-// );
-
 export const router = createBrowserRouter([
     {
         path: '/',

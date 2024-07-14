@@ -34,10 +34,9 @@ export async function getPokemonByName(
 
 export async function getPokemonList(
     offset: number = 0,
-    limit: number = 10,
 ): Promise<(PokemonCardData | undefined)[]> {
     const response: NamedAPIResourceList | void = await api
-        .listPokemons(offset, limit)
+        .listPokemons(offset)
         .then((data) => data)
         .catch(() => console.log('sdfsdf'));
 

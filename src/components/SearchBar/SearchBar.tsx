@@ -8,10 +8,11 @@ import useSearchQuery from '../../hooks/useSearchQuery';
 type SearchBarProps = {
     setPokemons: (pokemonData: (PokemonCardData | undefined)[]) => void;
     setIsLoading: (loadingStatus: boolean) => void;
+    pageNumber: number;
 };
 
 export default function SearchBar(props: SearchBarProps) {
-    const { setPokemons, setIsLoading } = props;
+    const { setPokemons, setIsLoading, pageNumber } = props;
 
     const [inputValue, setInputValue] = useSearchQuery('inputValue', '');
 
@@ -44,7 +45,8 @@ export default function SearchBar(props: SearchBarProps) {
             }
         } else {
             try {
-                const pokemonsData = await getPokemonList();
+                const offset = pageNumber * 20 - 20;
+                const pokemonsData = await getPokemonList(offset);
                 setPokemons(pokemonsData);
             } catch (e) {
                 console.log(e);
@@ -56,7 +58,7 @@ export default function SearchBar(props: SearchBarProps) {
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [pageNumber]);
 
     return (
         <header className="header">

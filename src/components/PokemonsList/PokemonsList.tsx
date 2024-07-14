@@ -1,32 +1,47 @@
 import PokemoItem from '../PokemonItem/PokemonItem';
 import { PokemonCardData } from '../../types/types';
+import {
+    Outlet,
+    useLocation,
+    useNavigate,
+    useOutletContext,
+} from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import './pokemonList.css';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 type PropsType = {
     pokemons: (PokemonCardData | undefined)[];
 };
 
+type OutletContextType = {
+    closeDetails: () => void;
+};
+
 export default function PokemonsList(props: PropsType) {
-    const [isShowingDetails, setIsShowingDetails] = useState(false);
+    const location = useLocation();
+    const [isShowingDetails, setIsShowingDetails] = useState(
+        location.pathname.includes('details'),
+    );
     const navigate = useNavigate();
-    const queryParams = new URLSearchParams(location.search);
 
     const openDetails = (key: number) => {
         setIsShowingDetails(true);
         navigate({
             pathname: `/details/${key}`,
-            search: queryParams.toString(),
+            search: location.search,
         });
     };
 
     const closeDetails = () => {
         if (isShowingDetails) {
-            navigate({ pathname: '/', search: queryParams.toString() });
+            navigate({ pathname: '/', search: location.search });
             setIsShowingDetails(false);
         }
     };
+
+    useEffect(() => {
+        setIsShowingDetails(false);
+    }, [props.pokemons]);
 
     if (props.pokemons.length === 1 && !props.pokemons[0]) {
         return <p>Pokemon is not found</p>;
@@ -47,7 +62,11 @@ export default function PokemonsList(props: PropsType) {
                     }
                 })}
             </div>
-            <Outlet />
+            <Outlet context={{ closeDetails } satisfies OutletContextType} />
         </div>
     );
+}
+
+export function useCloseDetails() {
+    return useOutletContext<OutletContextType>();
 }

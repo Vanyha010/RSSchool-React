@@ -20,7 +20,6 @@ export default function PokemonDetails() {
 
     return (
         <div className="details-section">
-            {/* {state === 'loading' && <Loader />} */}
             {pokemon && (
                 <div className="pokemon-details">
                     <div className="close-btn" onClick={closeDetails}></div>

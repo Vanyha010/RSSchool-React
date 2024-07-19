@@ -44,7 +44,6 @@
         "react/react-in-jsx-scope": "off",
         "prettier/prettier": "warn",
         "react-compiler/react-compiler": "error"
-        // "no-console": "warn"
     },
     "settings": {
         "react": {

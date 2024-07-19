@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import PokemonsList from '../PokemonsList/PokemonsList';
-import { PokemonCardData } from '../../types/types';
+import type { PokemonCardData } from '../../types/types';
 import Loader from '../Loader/Loader';
 import Pagination from '../Pagination/Pagination';
 import { useSearchParams } from 'react-router-dom';
 
 export default function PokemonSearch() {
     const [searchParams, setSearchParams] = useSearchParams();
-    // console.log(searchParams.get('page'));
     const [pageNumber, setPageNumber] = useState(1);
 
     const [pokemons, setPokemons] = useState<(PokemonCardData | undefined)[]>(

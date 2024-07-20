@@ -4,3 +4,8 @@ export type PokemonCardData = {
     imgUrl: string | null;
     description: string;
 };
+
+export type PokemonItemProps = {
+    pokemonData: PokemonCardData;
+    onPress: () => void;
+};

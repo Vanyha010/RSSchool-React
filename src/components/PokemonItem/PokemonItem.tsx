@@ -1,15 +1,10 @@
 import { useContext } from 'react';
 import { capitalize, cleanDescription } from '../../service/service';
-import { PokemonCardData } from '../../types/types';
+import { PokemonItemProps } from '../../types/types';
 import './pokemonItem.scss';
 import { ThemeContext } from '../../context/context';
 
-type PropsType = {
-    pokemonData: PokemonCardData;
-    onPress: () => void;
-};
-
-export default function PokemonItem(props: PropsType) {
+export default function PokemonItem(props: PokemonItemProps) {
     const { theme } = useContext(ThemeContext);
 
     return (

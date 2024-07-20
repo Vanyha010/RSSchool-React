@@ -5,6 +5,7 @@ import type { PokemonCardData } from '../../types/types';
 import Loader from '../Loader/Loader';
 import Pagination from '../Pagination/Pagination';
 import { useSearchParams } from 'react-router-dom';
+import ThemeToggler from '../ThemeToggler/ThemeToggler';
 
 export default function PokemonSearch() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -41,6 +42,7 @@ export default function PokemonSearch() {
 
     return (
         <>
+            <ThemeToggler />
             <SearchBar
                 setPokemons={setPokemons}
                 setIsLoading={setIsLoading}

@@ -1,9 +1,32 @@
+.details-section {
+    .pokemon-details {
+        background-color: rgba(184, 218, 218, 0.767);
+    }
+
+    .close-btn:before, .close-btn:after {
+      background-color: #333;
+    }
+}
+
+.details-section__dark {
+  .pokemon-details {
+      background-color: #333333;
+  }
+
+  .pokemon-details__title, .pokemon__stat, .pokemon__ability {
+    color: #ffffff;
+  }
+
+  .close-btn:before, .close-btn:after {
+    background-color: #ffffff;
+  }
+}
+
 .pokemon-details {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 380px;
-  background-color: rgba(184, 218, 218, 0.767);
   border-radius: 18px;
   margin: 0 10px;
   padding: 10px;
@@ -35,7 +58,6 @@
   top: 12px;
   width: 32px;
   height: 32px;
-  opacity: 0.3;
   transition: all .25s;
   cursor: pointer;
 }
@@ -48,7 +70,6 @@
   content: ' ';
   height: 33px;
   width: 2px;
-  background-color: #333;
 }
 .close-btn:before {
   transform: rotate(45deg);

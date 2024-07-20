@@ -1,6 +1,8 @@
+import { useContext } from 'react';
 import { capitalize, cleanDescription } from '../../service/service';
 import { PokemonCardData } from '../../types/types';
-import './pokemonItem.css';
+import './pokemonItem.scss';
+import { ThemeContext } from '../../context/context';
 
 type PropsType = {
     pokemonData: PokemonCardData;
@@ -8,8 +10,13 @@ type PropsType = {
 };
 
 export default function PokemonItem(props: PropsType) {
+    const { theme } = useContext(ThemeContext);
+
     return (
-        <div className="pokemon" onClick={props.onPress}>
+        <div
+            className={`pokemon ${theme === 'light' ? 'pokemon-light' : 'pokemon-dark'}`}
+            onClick={props.onPress}
+        >
             <h3 className="pokemon__title">
                 {capitalize(props.pokemonData.name)}
             </h3>

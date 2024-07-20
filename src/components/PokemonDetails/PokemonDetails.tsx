@@ -2,8 +2,10 @@ import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
 import getPokemonById from '../../api/apiRequests';
 import { Pokemon } from 'pokenode-ts';
 import { upperFirstLetter } from '../../service/service';
-import './pokemonDetails.css';
+import './pokemonDetails.scss';
 import { useCloseDetails } from '../PokemonsList/PokemonsList';
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/context';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
     const pokemon = await getPokemonById(Number(params.id));
@@ -11,6 +13,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 export default function PokemonDetails() {
+    const { theme } = useContext(ThemeContext);
     const { closeDetails } = useCloseDetails();
     const { pokemon } = useLoaderData() as { pokemon: Pokemon | undefined };
 
@@ -19,7 +22,11 @@ export default function PokemonDetails() {
     }
 
     return (
-        <div className="details-section">
+        <div
+            className={
+                theme === 'light' ? 'details-section' : 'details-section__dark'
+            }
+        >
             {pokemon && (
                 <div className="pokemon-details">
                     <div className="close-btn" onClick={closeDetails}></div>

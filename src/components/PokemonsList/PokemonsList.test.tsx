@@ -1,11 +1,11 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import PokemonsList from '../components/PokemonsList/PokemonsList';
-import { PokemonCardData, PokemonItemProps } from '../types/types';
+import PokemonsList from './PokemonsList';
+import { PokemonCardData, PokemonItemProps } from '../../types/types';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 const mockNavigate = vi.fn();
 
-vi.mock('../components/PokemonItem/PokemonItem', () => {
+vi.mock('../PokemonItem/PokemonItem', () => {
     return {
         __esModule: true,
         default: ({ pokemonData, onPress }: PokemonItemProps) => (

@@ -9,3 +9,25 @@ export type PokemonItemProps = {
     pokemonData: PokemonCardData;
     onPress: () => void;
 };
+
+export type SearchBarProps = {
+    setPokemons: (pokemonData: (PokemonCardData | undefined)[]) => void;
+    setIsLoading: (loadingStatus: boolean) => void;
+    pageNumber: number;
+};
+
+export type PaginationProps = {
+    pageNumber: number;
+    setPageNumber: React.Dispatch<React.SetStateAction<number>>;
+    pokemons: (PokemonCardData | undefined)[];
+};
+
+export type SelectedCardData = {
+    id: number;
+    name: string;
+};
+
+export type SelectedCardsAction = {
+    payload: SelectedCardData;
+    type: string;
+};

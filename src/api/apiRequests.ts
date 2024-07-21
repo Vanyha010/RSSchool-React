@@ -38,7 +38,7 @@ export async function getPokemonList(
     const response: NamedAPIResourceList | void = await api
         .listPokemons(offset)
         .then((data) => data)
-        .catch(() => console.log('sdfsdf'));
+        .catch((e) => console.log(e));
 
     const promises: Promise<PokemonCardData | undefined>[] = [];
 

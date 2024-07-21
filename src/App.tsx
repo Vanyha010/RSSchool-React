@@ -2,6 +2,8 @@ import PokemonSearch from './components/PokemonSearch/PokemonSearch';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import { useState } from 'react';
 import { ThemeContext } from './context/context';
+import { Provider } from 'react-redux';
+import store from './store/index';
 
 export default function App() {
     const [theme, setTheme] = useState('light');
@@ -15,12 +17,18 @@ export default function App() {
     };
 
     return (
-        <ThemeContext.Provider value={{ theme, changeTheme }}>
-            <main className={theme === 'light' ? 'main-light' : 'main-dark'}>
-                <ErrorBoundary>
-                    <PokemonSearch />
-                </ErrorBoundary>
-            </main>
-        </ThemeContext.Provider>
+        <ErrorBoundary>
+            <Provider store={store}>
+                <ThemeContext.Provider value={{ theme, changeTheme }}>
+                    <main
+                        className={
+                            theme === 'light' ? 'main-light' : 'main-dark'
+                        }
+                    >
+                        <PokemonSearch />
+                    </main>
+                </ThemeContext.Provider>
+            </Provider>
+        </ErrorBoundary>
     );
 }

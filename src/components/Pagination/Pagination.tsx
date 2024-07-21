@@ -1,14 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { PokemonCardData } from '../../types/types';
+import { PaginationProps } from '../../types/types';
 import './pagination.css';
 
-type PropsType = {
-    pageNumber: number;
-    setPageNumber: React.Dispatch<React.SetStateAction<number>>;
-    pokemons: (PokemonCardData | undefined)[];
-};
-
-export default function Pagination(props: PropsType) {
+export default function Pagination(props: PaginationProps) {
     const { pageNumber, setPageNumber, pokemons } = props;
     const navigate = useNavigate();
 
@@ -25,11 +19,11 @@ export default function Pagination(props: PropsType) {
     return (
         <div className="pagination-container">
             <button onClick={prevPage} disabled={pageNumber < 2}>
-                &lt;
+                Prev
             </button>
             <h3>{pageNumber}</h3>
             <button onClick={nextPage} disabled={pokemons.length === 1}>
-                &gt;
+                Next
             </button>
         </div>
     );

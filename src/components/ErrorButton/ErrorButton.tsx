@@ -8,7 +8,7 @@ export default function ErrorButton() {
     };
 
     if (error) {
-        throw new Error('Some crazy Error');
+        throw new Error('Test error to catch it');
     }
 
     return (

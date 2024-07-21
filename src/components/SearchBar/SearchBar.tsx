@@ -1,15 +1,9 @@
 import { ChangeEvent, useEffect } from 'react';
 import { getPokemonByName, getPokemonList } from '../../api/apiRequests';
-import { PokemonCardData } from '../../types/types';
+import { SearchBarProps } from '../../types/types';
 import './searchBar.css';
 import ErrorButton from '../ErrorButton/ErrorButton';
 import useSearchQuery from '../../hooks/useSearchQuery';
-
-type SearchBarProps = {
-    setPokemons: (pokemonData: (PokemonCardData | undefined)[]) => void;
-    setIsLoading: (loadingStatus: boolean) => void;
-    pageNumber: number;
-};
 
 export default function SearchBar(props: SearchBarProps) {
     const { setPokemons, setIsLoading, pageNumber } = props;
@@ -64,6 +58,7 @@ export default function SearchBar(props: SearchBarProps) {
         <header className="header">
             <input
                 type="text"
+                placeholder="Enter pokemon name"
                 value={inputValue}
                 onChange={handleInput}
                 className="header-input"

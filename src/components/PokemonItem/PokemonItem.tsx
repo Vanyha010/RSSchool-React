@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { capitalize, cleanDescription } from '../../service/service';
 import { PokemonItemProps } from '../../types/types';
-import './pokemonItem.scss';
 import { ThemeContext } from '../../context/context';
 import { useDispatch } from 'react-redux';
 import { addCard, removeCard } from '../../store/selectedCardsSlice';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import './pokemonItem.scss';
 
 export default function PokemonItem(props: PokemonItemProps) {
     const selectedCards = useAppSelector((state) => state.selectedCards.cards);
@@ -18,7 +18,13 @@ export default function PokemonItem(props: PokemonItemProps) {
         if (selectedCardsId.includes(pokemonData.key)) {
             dispatch(removeCard({ id: pokemonData.key }));
         } else {
-            dispatch(addCard({ id: pokemonData.key, name: pokemonData.name }));
+            dispatch(
+                addCard({
+                    id: pokemonData.key,
+                    name: pokemonData.name,
+                    imageURL: pokemonData.imgUrl,
+                }),
+            );
         }
     };
 

@@ -15,6 +15,7 @@ const selectedCardsSlice = createSlice({
             state.cards.push({
                 id: action.payload.id,
                 name: action.payload.name,
+                imageURL: action.payload.imageURL,
             });
         },
         removeCard(state, action) {

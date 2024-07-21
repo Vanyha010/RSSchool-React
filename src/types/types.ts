@@ -25,6 +25,7 @@ export type PaginationProps = {
 export type SelectedCardData = {
     id: number;
     name: string;
+    imageURL: string | null;
 };
 
 export type SelectedCardsAction = {

@@ -10,6 +10,28 @@ export default function Flyout() {
     const selectedCards = useAppSelector((state) => state.selectedCards.cards);
     const dispatch = useDispatch();
 
+    const download = () => {
+        const headers = Object.keys(selectedCards[0]).toString();
+
+        const main = selectedCards.map((item) => {
+            return Object.values(item).toString();
+        });
+
+        const csv = [headers, ...main].join('\n');
+        console.log(csv);
+        const blob = new Blob([csv], {
+            type: 'application/csv',
+        });
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${selectedCards.length}_pokemons.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    };
+
     if (selectedCards.length < 1) {
         return;
     }
@@ -22,7 +44,7 @@ export default function Flyout() {
             <button onClick={() => dispatch(unselectAll())}>
                 Unselect all
             </button>
-            <button>Download</button>
+            <button onClick={download}>Download</button>
         </div>
     );
 }

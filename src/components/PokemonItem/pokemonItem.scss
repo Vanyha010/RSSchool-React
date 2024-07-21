@@ -11,7 +11,7 @@
 .pokemon-dark {
   background-color: #333333;
 
-  .pokemon__text, .pokemon__title {
+  .pokemon__text, .pokemon__title, .pokemon__select {
     color: white;
   }
 }
@@ -20,4 +20,10 @@
 .pokemon__text {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 10px 0;
+}
+
+.pokemon__select {
+  user-select: none;
+  display: block;
+  padding: 5px;
 }

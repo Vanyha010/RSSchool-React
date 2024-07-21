@@ -1,23 +1,23 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { capitalize, cleanDescription } from '../../service/service';
 import { PokemonItemProps } from '../../types/types';
 import './pokemonItem.scss';
 import { ThemeContext } from '../../context/context';
 import { useDispatch } from 'react-redux';
-import { addCard } from '../../store/selectedCardsSlice';
+import { addCard, removeCard } from '../../store/selectedCardsSlice';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 export default function PokemonItem(props: PokemonItemProps) {
+    const selectedCards = useAppSelector((state) => state.selectedCards.cards);
+    const selectedCardsId = selectedCards.map((item) => item.id);
     const { pokemonData, onPress } = props;
     const dispatch = useDispatch();
     const { theme } = useContext(ThemeContext);
-    const [isSelected, setIsSelected] = useState(false);
 
-    const handleCheckboxClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.stopPropagation();
-        if (isSelected) {
-            setIsSelected(false);
+    const handleCheckboxClick = () => {
+        if (selectedCardsId.includes(pokemonData.key)) {
+            dispatch(removeCard({ id: pokemonData.key }));
         } else {
-            setIsSelected(true);
             dispatch(addCard({ id: pokemonData.key, name: pokemonData.name }));
         }
     };
@@ -39,13 +39,18 @@ export default function PokemonItem(props: PokemonItemProps) {
             <p className="pokemon__text">
                 {cleanDescription(pokemonData.description)}
             </p>
-            <label>
+            <label
+                className="pokemon__select"
+                onClick={(e) => e.stopPropagation()}
+            >
                 <input
                     type="checkbox"
-                    checked={isSelected}
+                    checked={selectedCardsId.includes(pokemonData.key)}
                     onChange={handleCheckboxClick}
                 />
-                {isSelected ? 'Remove from list' : 'Add to list'}
+                {selectedCardsId.includes(pokemonData.key)
+                    ? 'Remove from list'
+                    : 'Add to list'}
             </label>
         </div>
     );

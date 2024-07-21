@@ -33,6 +33,7 @@ export default function PokemonsList(props: PropsType) {
     };
 
     const closeDetails = () => {
+        console.log('close');
         if (isShowingDetails) {
             navigate({ pathname: '/', search: location.search });
             setIsShowingDetails(false);

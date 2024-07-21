@@ -1,0 +1,16 @@
+.flyout {
+  border-radius: 10px;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 7px;
+  text-align: center;
+}
+
+.flyout__light {
+  border: 1px solid black;
+}
+
+.flyout__dark {
+  color: white;
+  border: 1px solid white;
+}

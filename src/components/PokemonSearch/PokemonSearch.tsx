@@ -6,6 +6,7 @@ import Loader from '../Loader/Loader';
 import Pagination from '../Pagination/Pagination';
 import { useSearchParams } from 'react-router-dom';
 import ThemeToggler from '../ThemeToggler/ThemeToggler';
+import Flyout from '../Flyout/Flyout';
 
 export default function PokemonSearch() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -49,6 +50,7 @@ export default function PokemonSearch() {
                 pageNumber={pageNumber}
             />
             {isLoading ? <Loader /> : <PokemonsList pokemons={pokemons} />}
+            <Flyout />
             <Pagination
                 pageNumber={pageNumber}
                 setPageNumber={setPageNumber}

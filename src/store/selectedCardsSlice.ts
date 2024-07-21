@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SelectedCardsAction, SelectedCardData } from '../types/types';
+import { SelectedCardData } from '../types/types';
 
 type StateType = {
     cards: SelectedCardData[];
@@ -11,14 +11,20 @@ const selectedCardsSlice = createSlice({
     name: 'selectedCards',
     initialState,
     reducers: {
-        addCard(state, action: SelectedCardsAction) {
+        addCard(state, action) {
             state.cards.push({
                 id: action.payload.id,
                 name: action.payload.name,
             });
         },
-        removeCard() {},
-        unselectAll() {},
+        removeCard(state, action) {
+            state.cards = state.cards.filter((item) => {
+                return item.id !== action.payload.id;
+            });
+        },
+        unselectAll(state) {
+            state.cards = [];
+        },
     },
 });
 
